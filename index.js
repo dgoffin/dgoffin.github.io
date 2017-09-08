@@ -9,7 +9,7 @@ var json = {"items": [
  }
 ]};
 
-var news = document.getElementsByClassName("news-story")[0];
+var news = document.getElementsByClassName("proposals-list")[0];
 var items = json.items;
 for(var i = 0; i < items.length; i++) {
     var h5 = document.createElement("h5");
