@@ -109,7 +109,6 @@ function init () {
     proposals.sort(function compareProposalIDs (p1, p2) {
       return parseInt(p1.id.match(/\d\d\d\d/)[0]) - parseInt(p2.id.match(/\d\d\d\d/)[0])
     })
-    proposals = proposals.reverse()
 
     render()
     addEventListeners()
