@@ -10,7 +10,16 @@
 var myObj, myJSON, text, obj;
 
 //Storing data:
-var myObj = { "name":"John", "age":30, "car":null };
+myObj = {
+    "name":"John",
+    "age":30,
+    "cars": {
+        "car1":"Ford",
+        "car2":"BMW",
+        "car3":"Fiat"
+    }
+ }
+    
 for (x in myObj) {
     document.getElementById("demo").innerHTML += x + "<br>";
 }
