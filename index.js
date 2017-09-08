@@ -38,7 +38,7 @@ function render () {
 /** Displays the main list of proposals that takes up the majority of the page. */
 function renderBody () {
     
-    document.getElementById("demo").innerHTML = proposals.name;
+    document.getElementById("demo").innerHTML = proposals.title;
 }
 
     
