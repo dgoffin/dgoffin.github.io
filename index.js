@@ -1,19 +1,23 @@
-var obj, dbParam, xmlhttp, myObj, x, txt = "";
-obj = { "table":"customers", "limit":20 };
-dbParam = JSON.stringify(obj);
-xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        myObj = JSON.parse(this.responseText);
-        txt += "<table border='1'>"
-        for (x in myObj) {
-            txt += "<tr><td>" + myObj[x].name + "</td></tr>";
-        }
-        txt += "</table>"        
-        document.getElementById("demo").innerHTML = txt;
-    }
-};
-xmlhttp.open("POST", "https://dgoffin.github.io/lab-documents/json.json", true);
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("x=" + dbParam);
+var json = {"items": [
+ {
+   "title": "sample 1",
+   "author": "author 1"
+ },
+ {
+  "title": "sample 2",
+  "author": "author 2"
+ }
+]};
+
+var news = document.getElementsByClassName("news-story")[0];
+var items = json.items;
+for(var i = 0; i < items.length; i++) {
+    var h5 = document.createElement("h5");
+    h5.innerHTML = items[i].title;
+    news.appendChild(h5);
+    var p = document.createElement("p");
+    p.innerHTML = items[i].author;
+    news.appendChild(p);
+    
+    
 
