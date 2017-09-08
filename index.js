@@ -10,7 +10,7 @@ init()
 /** Primary entry point. */
 function init () {
     
-    var req = new XMLHttpRequest();
+    var req = new window.XMLHttpRequest();
     
     req.addEventListener('load', function (e) {
         
