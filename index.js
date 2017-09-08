@@ -39,6 +39,11 @@ function renderBody () {
   var article = document.querySelector('article')
 
   var proposalAttachPoint = article.querySelector('.proposals-list')
+  
+      var node = document.createElement("LI");
+    var textnode = document.createTextNode("Water");
+    node.appendChild(textnode);
+    proposalAttachPoint.appendChild(node);
 
 
 
