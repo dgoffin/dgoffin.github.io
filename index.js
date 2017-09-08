@@ -16,9 +16,9 @@ function init () {
         
         proposals = JSON.parse(req.responseText)
     
-        render()
+        
     })
-    
+    render()
     req.open('get', 'json.json');
     req.send();
 }
