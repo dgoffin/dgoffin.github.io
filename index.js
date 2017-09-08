@@ -386,19 +386,7 @@ function addEventListeners () {
     element.addEventListener('change', filterProposals)
   })
 
-  var expandableArea = document.querySelector('.filter-options')
-  var implementedToggle = document.querySelector('#filter-by-implemented')
-  implementedToggle.addEventListener('change', function () {
-    // hide or show the row of version options depending on the status of the 'Implemented' option
-    ;['#version-options', '#version-options-label'].forEach(function (selector) {
-      expandableArea.querySelector(selector).classList.toggle('hidden')
-    })
-
-    // don't persist any version selections when the row is hidden
-    ;[].concat.apply([], expandableArea.querySelectorAll('.filter-by-swift-version')).forEach(function (versionCheckbox) {
-      versionCheckbox.checked = false
-    })
-  })
+ 
 
   document.querySelector('.filter-button').addEventListener('click', toggleFiltering)
 
