@@ -13,16 +13,10 @@
 /** Holds the primary data used on this page: metadata about Swift Evolution proposals. */
 var proposals
 
-/**
- * To be updated when proposals are confirmed to have been implemented
- * in a new language version.
- */
-var languageVersions = ['2.2', '3', '3.0.1', '3.1', '4']
-
 /** Storage for the user's current selection of filters when filtering is toggled off. */
 var filterSelection = []
 
-var REPO_PROPOSALS_BASE_URL = 'https://github.com/apple/swift-evolution/blob/master/proposals'
+var REPO_PROPOSALS_BASE_URL = 'https://github.com/dgoffin/lab-documents/blob/master/proposals'
 
 /**
  * `name`: Mapping of the states in the proposals JSON to human-readable names.
