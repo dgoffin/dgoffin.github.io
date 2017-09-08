@@ -217,35 +217,6 @@ function renderNav () {
     return cb.querySelector(`#filter-by-${states['.implemented'].className}`)
   })[0]
 
-  if (implementedCheckboxIfPresent) {
-    // add an extra row of options to filter by language version
-    var versionRowHeader = html('h5', { id: 'version-options-label', className: 'hidden' }, 'Language Version')
-    var versionRow = html('ul', { id: 'version-options', className: 'filter-by-status hidden' })
-
-    var versionOptions = languageVersions.map(function (version) {
-      return html('li', null, [
-        html('input', {
-          type: 'checkbox',
-          id: 'filter-by-swift-' + _idSafeName(version),
-          className: 'filter-by-swift-version',
-          value: 'swift-' + _idSafeName(version)
-        }),
-        html('label', {
-          tabindex: '0',
-          role: 'button',
-          'for': 'filter-by-swift-' + _idSafeName(version)
-        }, 'Swift ' + version)
-      ])
-    })
-
-    versionOptions.forEach(function (version) {
-      versionRow.appendChild(version)
-    })
-
-    expandableArea.appendChild(versionRowHeader)
-    expandableArea.appendChild(versionRow)
-  }
-
   return nav
 }
 
@@ -289,8 +260,6 @@ function renderBody () {
       var detailNodes = []
       detailNodes.push(renderAuthors(proposal.authors))
 
-      if (state === '.implemented') detailNodes.push(renderVersion(proposal.status.version))
-
       if (state === '.acceptedWithRevisions') detailNodes.push(renderStatus(proposal.status))
 
       if (state === '.activeReview' || state === '.scheduledForReview') {
@@ -332,18 +301,6 @@ function renderAuthors (authors) {
       authors.length > 1 ? 'Authors: ' : 'Author: '
     ),
     html('div', { className: 'proposal-detail-value' }, authorNodes)
-  ])
-}
-
-/** For `.implemented` proposals, display the version of Swift in which they first appeared. */
-function renderVersion (version) {
-  return html('div', { className: 'proposal-detail' }, [
-    html('div', { className: 'proposal-detail-label' }, [
-      'Implemented In: '
-    ]),
-    html('div', { className: 'proposal-detail-value' }, [
-      'Swift ' + version
-    ])
   ])
 }
 
