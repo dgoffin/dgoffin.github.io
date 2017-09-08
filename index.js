@@ -40,12 +40,7 @@ function renderBody () {
 
   var proposalAttachPoint = article.querySelector('.proposals-list')
 
-  var proposalPresentationOrder = [
-    '.awaitingReview', '.scheduledForReview', '.activeReview', '.accepted',
-    '.acceptedWithRevisions', '.implemented', '.returnedForRevision', '.deferred', '.rejected', '.withdrawn'
-  ]
 
-  proposalPresentationOrder.map(function (state) {
 
       proposals.map(function (proposal) {
       var proposalBody = html('section', { id: proposal.id, className: 'proposal ' + proposal.id }, [
@@ -80,7 +75,7 @@ function renderBody () {
       proposalBody.querySelector('.proposal-content').appendChild(details)
       proposalAttachPoint.appendChild(proposalBody)
     })
-  })
+
 
   return article
 }
