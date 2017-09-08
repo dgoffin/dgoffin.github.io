@@ -48,7 +48,7 @@ function renderBody () {
 
        var proposalBody = document.createElement("LI");
         var textnode = document.createTextNode("DEF");
-        node.appendChild(textnode);
+        node.proposalBody(textnode);
         
         
         
