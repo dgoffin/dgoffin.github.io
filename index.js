@@ -10,6 +10,11 @@ init()
 /** Primary entry point. */
 function init () {
     
+        var node = document.createElement("LI");
+    var textnode = document.createTextNode("Water");
+    node.appendChild(textnode);
+    document.getElementById("myList").appendChild(node);
+    
     var req = new window.XMLHttpRequest();
     
     req.addEventListener('load', function (e) {
@@ -37,10 +42,7 @@ function render () {
 /** Displays the main list of proposals that takes up the majority of the page. */
 function renderBody () {
 
-    var node = document.createElement("LI");
-    var textnode = document.createTextNode("Water");
-    node.appendChild(textnode);
-    document.getElementById("myList").appendChild(node);
+
     
     
     
