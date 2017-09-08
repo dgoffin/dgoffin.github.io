@@ -37,8 +37,15 @@ function render () {
 
 /** Displays the main list of proposals that takes up the majority of the page. */
 function renderBody () {
-    
-    document.getElementById("demo").innerHTML = proposals.title;
+        
+    var proposalAttachPoint = article.querySelector('.demo')
+
+
+
+    proposals.map(function (proposal) {
+   
+            html('h4', { className: 'proposal-title' }, proposal.title)
+
 }
 
     
