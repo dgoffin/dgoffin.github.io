@@ -6,27 +6,9 @@
 
 <p id="demo"></p>
 
-<script>
-var myObj, myJSON, text, obj;
-
-//Storing data:
-
-    
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var myObj = JSON.parse(this.responseText);
-        document.getElementById("demo").innerHTML = myObj.name;
-    }
-};
-xmlhttp.open("GET", "json.json", true);
-xmlhttp.send();
-    
-    
-</script>
+<script src="index.js"></script>
   
   
-</script>
 
 </body>
 </html>
