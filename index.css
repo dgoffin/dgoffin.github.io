@@ -189,7 +189,7 @@ section ul, section li {
     display: none !important;
 }
 
-#documents-count {
+#proposals-count {
     line-height: 40px;
     font-size: 16px;
     color: #333;
