@@ -13,84 +13,6 @@
 /** Holds the primary data used on this page: metadata about Swift Evolution proposals. */
 var proposals
 
-/**
- * To be updated when proposals are confirmed to have been implemented
- * in a new language version.
- */
-var languageVersions = ['2.2', '3', '3.0.1', '3.1', '4']
-
-/** Storage for the user's current selection of filters when filtering is toggled off. */
-var filterSelection = []
-
-var REPO_PROPOSALS_BASE_URL = 'https://github.com/dgoffin/lab-documents/blob/master/proposals'
-
-/**
- * `name`: Mapping of the states in the proposals JSON to human-readable names.
- *
- * `shortName`:  Mapping of the states in the proposals JSON to short human-readable names.
- *  Used for the left-hand column of proposal statuses.
- *
- * `className`: Mapping of states in the proposals JSON to the CSS class names used
- * to manipulate and display proposals based on their status.
- */
-var states = {
-  '.awaitingReview': {
-    name: 'Awaiting Review',
-    shortName: 'Awaiting Review',
-    className: 'awaiting-review'
-  },
-  '.scheduledForReview': {
-    name: 'Scheduled for Review',
-    shortName: 'Scheduled',
-    className: 'scheduled-for-review'
-  },
-  '.activeReview': {
-    name: 'Active Review',
-    shortName: 'Active Review',
-    className: 'active-review'
-  },
-  '.returnedForRevision': {
-    name: 'Returned for Revision',
-    shortName: 'Returned',
-    className: 'returned-for-revision'
-  },
-  '.withdrawn': {
-    name: 'Withdrawn',
-    shortName: 'Withdrawn',
-    className: 'withdrawn'
-  },
-  '.deferred': {
-    name: 'Deferred',
-    shortName: 'Deferred',
-    className: 'deferred'
-  },
-  '.accepted': {
-    name: 'Accepted',
-    shortName: 'Accepted',
-    className: 'accepted'
-  },
-  '.acceptedWithRevisions': {
-    name: 'Accepted with revisions',
-    shortName: 'Accepted',
-    className: 'accepted-with-revisions'
-  },
-  '.rejected': {
-    name: 'Rejected',
-    shortName: 'Rejected',
-    className: 'rejected'
-  },
-  '.implemented': {
-    name: 'Implemented',
-    shortName: 'Implemented',
-    className: 'implemented'
-  },
-  '.error': {
-    name: 'Error',
-    shortName: 'Error',
-    className: 'error'
-  }
-}
-
 init()
 
 /** Primary entry point. */
@@ -100,33 +22,10 @@ function init () {
   req.addEventListener('load', function (e) {
     proposals = JSON.parse(req.responseText)
 
-    // don't display malformed proposals
-    proposals = proposals.filter(function (proposal) {
-      return !proposal.errors
-    })
 
-    // descending numeric sort based the numeric nnnn in a proposal ID's SE-nnnn
-    proposals.sort(function compareProposalIDs (p1, p2) {
-      return parseInt(p1.id.match(/\d\d\d\d/)[0]) - parseInt(p2.id.match(/\d\d\d\d/)[0])
-    })
-    proposals = proposals.reverse()
 
     render()
     addEventListeners()
-
-    // apply filters when the page loads with a search already filled out.
-    // typically this happens after navigating backwards in a tab's history.
-    if (document.querySelector('#search-filter').value.trim()) {
-      filterProposals()
-    }
-
-    // apply selections from the current page's URI fragment
-    _applyFragment(document.location.hash)
-  })
-
-  req.addEventListener('error', function (e) {
-    document.querySelector('#proposals-count').innerText = 'Proposal data failed to load.'
-  })
 
   req.open('get', 'https://dgoffin/lab-documents/json.json')
   req.send()
