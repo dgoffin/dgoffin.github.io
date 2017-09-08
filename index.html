@@ -4,9 +4,7 @@
 
 <h2>Store and retrieve data from local storage.</h2>
 
-<ul class="proposals-list">
-  <!-- {proposals} -->
-</ul>
+<p id="demo"></p>
 
 <script>
 var myObj, myJSON, text, obj;
@@ -18,7 +16,7 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var myObj = JSON.parse(this.responseText);
-        document.getElementById("proposals-list").innerHTML = myObj.name;
+        document.getElementById("demo").innerHTML = myObj.name;
     }
 };
 xmlhttp.open("GET", "json.json", true);
