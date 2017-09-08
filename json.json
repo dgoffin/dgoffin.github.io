@@ -1,49 +1,5 @@
 [
   {
-    "summary": "Argument labels are an important part of the interface of a Swift function,\ndescribing what particular arguments to the function do and improving\nreadability. Sometimes, the most natural label for an argument coincides with a\nlanguage keyword, such as `in`, `repeat`, or `defer`. Such keywords should be\nallowed as argument labels, allowing better expression of these interfaces.\n",
-    "authors": [
-      {
-        "name": "Doug Gregor",
-        "link": "https://github.com/DougGregor"
-      }
-    ],
-    "id": "SE-0001",
-    "status": {
-      "state": ".implemented"
-    },
-    "link": "0001-keywords-as-argument-labels.md",
-    "title": " Allow (most) keywords as argument labels\n"
-  },
- 
-  {
-    "summary": "Curried function declaration syntax `func foo(x: Int)(y: Int)` is of limited\nusefulness and creates a lot of language and implementation complexity. We\nshould remove it.\n",
-    "authors": [
-      {
-        "name": "Joe Groff",
-        "link": "https://github.com/jckarter"
-      }
-    ],
-    "id": "SE-0002",
-    "status": {
-      "state": ".implemented"
-    },
-    "link": "0002-remove-currying.md",
-    "title": " Removing currying func declaration syntax\n"
-  },
- 
- {
-    "summary": "There has been some confusion of semantics when a function parameter is marked\nas `inout` compared to `var`. Both give a mutable local copy of a value but\nparameters marked `inout` are automatically written back.\n",
-    "authors": [
-      {
-        "name": "David Farler",
-        "link": "https://github.com/bitjammer"
-      }
-    ],
-    "id": "SE-0003",
-    "status": {
-      "state": ".implemented"
-    },
-    "link": "0003-remove-var-parameters.md",
-    "title": " Removing var from Function Parameters\n"
+    "summary": "Argument labels are an important part of the interface of a Swift function,\ndescribing what particular arguments to the function do and improving\nreadability. Sometimes, the most natural label for an argument coincides with a\nlanguage keyword, such as `in`, `repeat`, or `defer`. Such keywords should be\nallowed as argument labels, allowing better expression of these interfaces.\n"
   }
  ]
