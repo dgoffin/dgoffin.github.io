@@ -2,9 +2,8 @@
 /** Holds the primary data used on this page: metadata about Swift Evolution proposals. */
 var proposals
 
-var myObj, myJSON, text, obj;
+var REPO_PROPOSALS_BASE_URL = 'https://github.com/apple/swift-evolution/blob/master/proposals'
 
-//Storing data:
 
 init()
 
