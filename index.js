@@ -290,7 +290,6 @@ function renderBody () {
       detailNodes.push(renderAuthors(proposal.authors))
 
       if (proposal.reviewManager.name) detailNodes.push(renderReviewManager(proposal.reviewManager))
-      if (proposal.trackingBugs) detailNodes.push(renderTrackingBugs(proposal.trackingBugs))
       if (state === '.implemented') detailNodes.push(renderVersion(proposal.status.version))
 
       if (state === '.acceptedWithRevisions') detailNodes.push(renderStatus(proposal.status))
@@ -346,31 +345,6 @@ function renderReviewManager (reviewManager) {
         ? html('a', { href: reviewManager.link, target: '_blank' }, reviewManager.name)
         : reviewManager.name
     ])
-  ])
-}
-
-/** Tracking bugs linked in a proposal are updated via bugs.swift.org. */
-function renderTrackingBugs (bugs) {
-  var bugNodes = bugs.map(function (bug) {
-    return html('a', { href: bug.link, target: '_blank' }, [
-      bug.id,
-      ' (',
-      bug.assignee || 'Unassigned',
-      ', ',
-      bug.status,
-      ')'
-    ])
-  })
-
-  bugNodes = _joinNodes(bugNodes, ', ')
-
-  return html('div', { className: 'proposal-detail' }, [
-    html('div', { className: 'proposal-detail-label' }, [
-      bugs.length > 1 ? 'Bugs: ' : 'Bug: '
-    ]),
-    html('div', { className: 'bug-list proposal-detail-value' },
-      bugNodes
-    )
   ])
 }
 
@@ -637,10 +611,6 @@ function _searchProposals (filterText) {
       ['status', 'version'],
       ['authors', 'name'],
       ['authors', 'link'],
-      ['trackingBugs', 'link'],
-      ['trackingBugs', 'status'],
-      ['trackingBugs', 'id'],
-      ['trackingBugs', 'assignee']
   ]
 
   // reflect over the proposals and find ones with matching properties
