@@ -13,7 +13,7 @@ xmlhttp.onreadystatechange = function() {
         document.getElementById("demo").innerHTML = txt;
     }
 };
-xmlhttp.open("POST", "json_demo_db_post.php", true);
+xmlhttp.open("POST", "https://dgoffin.github.io/lab-documents/json.json", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send("x=" + dbParam);
 
