@@ -125,7 +125,7 @@ function init () {
   })
 
   req.addEventListener('error', function (e) {
-    document.querySelector('#proposals-count').innerText = 'Proposal data failed to load.'
+    document.querySelector('#documents-count').innerText = 'Proposal data failed to load.'
   })
 
   req.open('get', 'https://data.swift.org/swift-evolution/proposals')
