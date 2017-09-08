@@ -13,10 +13,16 @@
 /** Holds the primary data used on this page: metadata about Swift Evolution proposals. */
 var proposals
 
+/**
+ * To be updated when proposals are confirmed to have been implemented
+ * in a new language version.
+ */
+var languageVersions = ['2.2', '3', '3.0.1', '3.1', '4']
+
 /** Storage for the user's current selection of filters when filtering is toggled off. */
 var filterSelection = []
 
-var REPO_PROPOSALS_BASE_URL = 'https://github.com/dgoffin/lab-documents/blob/master/proposals'
+var REPO_PROPOSALS_BASE_URL = 'https://github.com/apple/swift-evolution/blob/master/proposals'
 
 /**
  * `name`: Mapping of the states in the proposals JSON to human-readable names.
@@ -103,6 +109,7 @@ function init () {
     proposals.sort(function compareProposalIDs (p1, p2) {
       return parseInt(p1.id.match(/\d\d\d\d/)[0]) - parseInt(p2.id.match(/\d\d\d\d/)[0])
     })
+    proposals = proposals.reverse()
 
     render()
     addEventListeners()
@@ -121,7 +128,7 @@ function init () {
     document.querySelector('#proposals-count').innerText = 'Proposal data failed to load.'
   })
 
-  req.open('get', 'https://goffinlab.com/test/index.json')
+  req.open('get', 'https://data.swift.org/swift-evolution/proposals')
   req.send()
 }
 
@@ -211,6 +218,35 @@ function renderNav () {
     return cb.querySelector(`#filter-by-${states['.implemented'].className}`)
   })[0]
 
+  if (implementedCheckboxIfPresent) {
+    // add an extra row of options to filter by language version
+    var versionRowHeader = html('h5', { id: 'version-options-label', className: 'hidden' }, 'Language Version')
+    var versionRow = html('ul', { id: 'version-options', className: 'filter-by-status hidden' })
+
+    var versionOptions = languageVersions.map(function (version) {
+      return html('li', null, [
+        html('input', {
+          type: 'checkbox',
+          id: 'filter-by-swift-' + _idSafeName(version),
+          className: 'filter-by-swift-version',
+          value: 'swift-' + _idSafeName(version)
+        }),
+        html('label', {
+          tabindex: '0',
+          role: 'button',
+          'for': 'filter-by-swift-' + _idSafeName(version)
+        }, 'Swift ' + version)
+      ])
+    })
+
+    versionOptions.forEach(function (version) {
+      versionRow.appendChild(version)
+    })
+
+    expandableArea.appendChild(versionRowHeader)
+    expandableArea.appendChild(versionRow)
+  }
+
   return nav
 }
 
@@ -254,6 +290,10 @@ function renderBody () {
       var detailNodes = []
       detailNodes.push(renderAuthors(proposal.authors))
 
+      if (proposal.reviewManager.name) detailNodes.push(renderReviewManager(proposal.reviewManager))
+      if (proposal.trackingBugs) detailNodes.push(renderTrackingBugs(proposal.trackingBugs))
+      if (state === '.implemented') detailNodes.push(renderVersion(proposal.status.version))
+
       if (state === '.acceptedWithRevisions') detailNodes.push(renderStatus(proposal.status))
 
       if (state === '.activeReview' || state === '.scheduledForReview') {
@@ -295,6 +335,55 @@ function renderAuthors (authors) {
       authors.length > 1 ? 'Authors: ' : 'Author: '
     ),
     html('div', { className: 'proposal-detail-value' }, authorNodes)
+  ])
+}
+
+/** Review managers have a `name` and optional `link`. */
+function renderReviewManager (reviewManager) {
+  return html('div', { className: 'review-manager proposal-detail' }, [
+    html('div', { className: 'proposal-detail-label' }, 'Review Manager: '),
+    html('div', { className: 'proposal-detail-value' }, [
+      reviewManager.link
+        ? html('a', { href: reviewManager.link, target: '_blank' }, reviewManager.name)
+        : reviewManager.name
+    ])
+  ])
+}
+
+/** Tracking bugs linked in a proposal are updated via bugs.swift.org. */
+function renderTrackingBugs (bugs) {
+  var bugNodes = bugs.map(function (bug) {
+    return html('a', { href: bug.link, target: '_blank' }, [
+      bug.id,
+      ' (',
+      bug.assignee || 'Unassigned',
+      ', ',
+      bug.status,
+      ')'
+    ])
+  })
+
+  bugNodes = _joinNodes(bugNodes, ', ')
+
+  return html('div', { className: 'proposal-detail' }, [
+    html('div', { className: 'proposal-detail-label' }, [
+      bugs.length > 1 ? 'Bugs: ' : 'Bug: '
+    ]),
+    html('div', { className: 'bug-list proposal-detail-value' },
+      bugNodes
+    )
+  ])
+}
+
+/** For `.implemented` proposals, display the version of Swift in which they first appeared. */
+function renderVersion (version) {
+  return html('div', { className: 'proposal-detail' }, [
+    html('div', { className: 'proposal-detail-label' }, [
+      'Implemented In: '
+    ]),
+    html('div', { className: 'proposal-detail-value' }, [
+      'Swift ' + version
+    ])
   ])
 }
 
@@ -380,7 +469,19 @@ function addEventListeners () {
     element.addEventListener('change', filterProposals)
   })
 
- 
+  var expandableArea = document.querySelector('.filter-options')
+  var implementedToggle = document.querySelector('#filter-by-implemented')
+  implementedToggle.addEventListener('change', function () {
+    // hide or show the row of version options depending on the status of the 'Implemented' option
+    ;['#version-options', '#version-options-label'].forEach(function (selector) {
+      expandableArea.querySelector(selector).classList.toggle('hidden')
+    })
+
+    // don't persist any version selections when the row is hidden
+    ;[].concat.apply([], expandableArea.querySelectorAll('.filter-by-swift-version')).forEach(function (versionCheckbox) {
+      versionCheckbox.checked = false
+    })
+  })
 
   document.querySelector('.filter-button').addEventListener('click', toggleFiltering)
 
@@ -532,10 +633,15 @@ function _searchProposals (filterText) {
   var searchableProperties = [
       ['id'],
       ['title'],
+      ['reviewManager', 'name'],
       ['status', 'state'],
       ['status', 'version'],
       ['authors', 'name'],
       ['authors', 'link'],
+      ['trackingBugs', 'link'],
+      ['trackingBugs', 'status'],
+      ['trackingBugs', 'id'],
+      ['trackingBugs', 'assignee']
   ]
 
   // reflect over the proposals and find ones with matching properties
