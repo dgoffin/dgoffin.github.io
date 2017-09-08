@@ -289,7 +289,6 @@ function renderBody () {
       var detailNodes = []
       detailNodes.push(renderAuthors(proposal.authors))
 
-      if (proposal.reviewManager.name) detailNodes.push(renderReviewManager(proposal.reviewManager))
       if (state === '.implemented') detailNodes.push(renderVersion(proposal.status.version))
 
       if (state === '.acceptedWithRevisions') detailNodes.push(renderStatus(proposal.status))
@@ -333,18 +332,6 @@ function renderAuthors (authors) {
       authors.length > 1 ? 'Authors: ' : 'Author: '
     ),
     html('div', { className: 'proposal-detail-value' }, authorNodes)
-  ])
-}
-
-/** Review managers have a `name` and optional `link`. */
-function renderReviewManager (reviewManager) {
-  return html('div', { className: 'review-manager proposal-detail' }, [
-    html('div', { className: 'proposal-detail-label' }, 'Review Manager: '),
-    html('div', { className: 'proposal-detail-value' }, [
-      reviewManager.link
-        ? html('a', { href: reviewManager.link, target: '_blank' }, reviewManager.name)
-        : reviewManager.name
-    ])
   ])
 }
 
@@ -606,7 +593,6 @@ function _searchProposals (filterText) {
   var searchableProperties = [
       ['id'],
       ['title'],
-      ['reviewManager', 'name'],
       ['status', 'state'],
       ['status', 'version'],
       ['authors', 'name'],
