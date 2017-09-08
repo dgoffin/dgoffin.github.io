@@ -128,7 +128,7 @@ function init () {
     document.querySelector('#proposals-count').innerText = 'Proposal data failed to load.'
   })
 
-  req.open('get', 'https://github.com/dgoffin/lab-documents/blob/master/index.json')
+  req.open('get', 'https://dgoffin.github.com/lab-documents/index.json')
   req.send()
 }
 
