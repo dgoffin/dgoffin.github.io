@@ -125,10 +125,10 @@ function init () {
   })
 
   req.addEventListener('error', function (e) {
-    document.querySelector('#proposals-count').innerText = 'Proposal data failed to load.'
+    document.querySelector('#proposals-count').innerText = 'Document data failed to load.'
   })
 
-  req.open('get', 'https://https://dgoffin.github.io/proposals')
+  req.open('get', 'https://dgoffin.github.io/proposals')
   req.send()
 }
 
