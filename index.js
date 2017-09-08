@@ -42,7 +42,7 @@ function renderBody () {
     node.appendChild(textnode);
     document.getElementById("myList").appendChild(node);
     
-    var proposalBody = html('h4', { className: 'proposal-title' }, 'Hello');
+    var proposalBody = html('h4', { className: 'proposal-title' }, "Hello");
     
         document.getElementById("myList").appendChild(proposalBody);
 
