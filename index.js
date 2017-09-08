@@ -128,7 +128,7 @@ function init () {
     document.querySelector('#proposals-count').innerText = 'Document data failed to load.'
   })
 
-  req.open('get', 'https://dgoffin.github.io/lab-documents/proposals/')
+  req.open('get', 'https://dgoffin.github.io/lab-documents/proposals')
   req.send()
 }
 
