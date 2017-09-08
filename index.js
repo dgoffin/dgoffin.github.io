@@ -43,36 +43,11 @@ function renderBody () {
 
 
       proposals.map(function (proposal) {
-      var proposalBody = html('section', { id: proposal.id, className: 'proposal ' + proposal.id }, [
-        html('div', { className: 'status-pill-container' }, [
-          html('span', { className: 'status-pill color-' + states[state].className }, [
-            states[proposal.status.state].shortName
-          ])
-        ]),
-        html('div', { className: 'proposal-content' }, [
-          html('div', { className: 'proposal-header' }, [
-            html('span', { className: 'proposal-id' }, [
-              proposal.id
-            ]),
-            html('h4', { className: 'proposal-title' }, [
-              html('a', {
-                href: REPO_PROPOSALS_BASE_URL + '/' + proposal.link,
-                target: '_blank'
-              }, [
-                proposal.title
-              ])
-            ])
-          ])
-        ])
-      ])
+          
+      var proposalBody = 
+          
+            html('h4', { className: 'proposal-title' }, proposal.title )
 
-      var detailNodes = []
-      detailNodes.push(renderAuthors(proposal.authors))
-
-
-      var details = html('div', { className: 'proposal-details' }, detailNodes)
-
-      proposalBody.querySelector('.proposal-content').appendChild(details)
       proposalAttachPoint.appendChild(proposalBody)
     })
 
