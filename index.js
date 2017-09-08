@@ -22,7 +22,7 @@ var languageVersions = ['2.2', '3', '3.0.1', '3.1', '4']
 /** Storage for the user's current selection of filters when filtering is toggled off. */
 var filterSelection = []
 
-var REPO_PROPOSALS_BASE_URL = 'https://github.com/dgoffin/lab-documents/blob/master/proposals'
+var REPO_PROPOSALS_BASE_URL = 'https://github.com/apple/swift-evolution/blob/master/proposals'
 
 /**
  * `name`: Mapping of the states in the proposals JSON to human-readable names.
@@ -125,10 +125,10 @@ function init () {
   })
 
   req.addEventListener('error', function (e) {
-    document.querySelector('#proposals-count').innerText = 'Document data failed to load.'
+    document.querySelector('#proposals-count').innerText = 'Proposal data failed to load.'
   })
 
-  req.open('get', 'https://dgoffin.github.io/lab-documents/proposals')
+  req.open('get', 'https://data.swift.org/swift-evolution/proposals')
   req.send()
 }
 
