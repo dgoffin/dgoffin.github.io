@@ -38,26 +38,10 @@ function render () {
 function renderBody () {
   var article = document.querySelector('article')
 
-  var proposalAttachPoint = article.querySelector('.proposals-list')
-  
-      var node = document.createElement("LI");
+    var node = document.createElement("LI");
     var textnode = document.createTextNode("Water");
     node.appendChild(textnode);
-    proposalAttachPoint.appendChild(node);
-
-
-
-      proposals.map(function (proposal) {
-          
-      var proposalBody = 
-          
-            html('h4', { className: 'proposal-title' }, proposal.title )
-
-      proposalAttachPoint.appendChild(proposalBody)
-    })
-
-
-  return article
+    document.getElementById("proposals-list").appendChild(node);
 }
 
     
