@@ -17,10 +17,12 @@ function init () {
     req.addEventListener('load', function (e) {
         
         proposals = JSON.parse(req.responseText)
+        
+        render()
     
         
     })
-    render()
+    
     req.open('get', 'json.json');
     req.send();
 }
