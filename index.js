@@ -128,7 +128,7 @@ function init () {
     document.querySelector('#proposals-count').innerText = 'Proposal data failed to load.'
   })
 
-  req.open('get', 'https://goffinlab.com/test')
+  req.open('get', 'https://github.com/apple/swift-evolution/blob/master/index.json')
   req.send()
 }
 
