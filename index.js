@@ -41,6 +41,12 @@ function renderBody () {
     var textnode = document.createTextNode("Water");
     node.appendChild(textnode);
     document.getElementById("myList").appendChild(node);
+    
+    var proposalBody = html('h4', { className: 'proposal-title' }, 'Hello');
+    
+        document.getElementById("myList").appendChild(proposalBody);
+
+    
 }
 
     
