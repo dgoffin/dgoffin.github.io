@@ -38,7 +38,7 @@ function render () {
 /** Displays the main list of proposals that takes up the majority of the page. */
 function renderBody () {
         
-    var proposalAttachPoint = article.querySelector('.demo')
+    var proposalAttachPoint = article.querySelector('.proposals-list')
 
 
 
