@@ -36,12 +36,11 @@ function render () {
 
 /** Displays the main list of proposals that takes up the majority of the page. */
 function renderBody () {
-  var article = document.querySelector('article')
 
     var node = document.createElement("LI");
     var textnode = document.createTextNode("Water");
     node.appendChild(textnode);
-    document.getElementById("proposals-list").appendChild(node);
+    document.getElementById("myList").appendChild(node);
 }
 
     
