@@ -41,11 +41,15 @@ function render () {
 /** Displays the main list of proposals that takes up the majority of the page. */
 function renderBody () {
     
-    proposals.map(function (proposal) {  
-        var node = document.createElement("LI");
+    for (i = 0; i < 5; i++) { 
+            var node = document.createElement("LI");
         var textnode = document.createTextNode("ABC");
         node.appendChild(textnode);
         document.getElementById("myList").appendChild(node);
+}
+    
+    proposals.map(function (proposal) {  
+
     })
 
 
