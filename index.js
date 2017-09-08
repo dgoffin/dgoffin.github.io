@@ -10,10 +10,7 @@ init()
 /** Primary entry point. */
 function init () {
     
-        var node = document.createElement("LI");
-    var textnode = document.createTextNode("Water");
-    node.appendChild(textnode);
-    document.getElementById("myList").appendChild(node);
+
     
     var req = new window.XMLHttpRequest();
     
@@ -43,7 +40,10 @@ function render () {
 function renderBody () {
 
 
-    
+            var node = document.createElement("LI");
+    var textnode = document.createTextNode("Water");
+    node.appendChild(textnode);
+    document.getElementById("myList").appendChild(node);
     
     
 
