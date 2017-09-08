@@ -1,9 +1,9 @@
-myObj = {
+{
     "name":"John",
-    "age":30,
-    "cars": {
-        "car1":"Ford",
-        "car2":"BMW",
-        "car3":"Fiat"
-    }
- }
+    "age":31,
+    "pets":[
+        { "animal":"dog", "name":"Fido" },
+        { "animal":"cat", "name":"Felix" },
+        { "animal":"hamster", "name":"Lightning" }
+    ]
+}
